@@ -39,7 +39,6 @@ rb_tree_t *rb_tree_insert(rb_tree_t **tree, int value)
 	else
 		y->right = new;
 	rb_insert_fixup(tree, new);
-	printf("hi\n");
 	return (new);
 }
 
