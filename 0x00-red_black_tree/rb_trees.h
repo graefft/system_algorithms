@@ -42,7 +42,7 @@ rb_tree_t *rb_tree_node(rb_tree_t *parent, int value, rb_color_t color);
 
 /* rb_tree_is_valid.c */
 int rb_tree_is_valid(const rb_tree_t *tree);
-int is_RBT(const rb_tree_t *node, const rb_tree_t *min, const rb_tree_t *max);
+int is_RBT(const rb_tree_t *node, int min, int max);
 
 /* rb_tree_insert.c */
 rb_tree_t *rb_tree_insert(rb_tree_t **tree, int value);
