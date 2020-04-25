@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <limits.h>
 
+#define MAXIMUM(X, Y) ((X >= Y) ? X : Y)
+
 /**
  * enum rb_color_e - Possible color of a Red-Black tree
  *
@@ -42,7 +44,10 @@ rb_tree_t *rb_tree_node(rb_tree_t *parent, int value, rb_color_t color);
 
 /* rb_tree_is_valid.c */
 int rb_tree_is_valid(const rb_tree_t *tree);
-int is_RBT(const rb_tree_t *node, int min, int max);
+int is_bst(const rb_tree_t *tree, int min, int max);
+int correct_colors(const rb_tree_t *tree);
+int find_height(const rb_tree_t *tree);
+int check_rb_height(const rb_tree_t *tree, int blk_height, int height);
 
 /* rb_tree_insert.c */
 rb_tree_t *rb_tree_insert(rb_tree_t **tree, int value);
