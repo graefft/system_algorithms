@@ -7,6 +7,16 @@
 
 #define MAXIMUM(X, Y) ((X >= Y) ? X : Y)
 
+#define BLK "\033[0;30m"
+#define ARED "\033[0;31m"
+#define GRN "\033[0;32m"
+#define YEL "\033[0;33m"
+#define BLU "\033[0;34m"
+#define MAG "\033[0;35m"
+#define CYN "\033[0;36m"
+#define WHT "\033[0;37m"
+#define RES "\033[0;0m"
+
 /**
  * enum rb_color_e - Possible color of a Red-Black tree
  *
@@ -39,6 +49,8 @@ typedef struct rb_tree_s
 	struct rb_tree_s *right;
 } rb_tree_t;
 
+void rb_tree_print(const rb_tree_t *tree);
+
 /* rb_tree_node.c */
 rb_tree_t *rb_tree_node(rb_tree_t *parent, int value, rb_color_t color);
 
@@ -57,7 +69,16 @@ rb_tree_t *rb_insert_fixup_RIGHT(rb_tree_t **tree, rb_tree_t *new);
 void rb_rotate_left(rb_tree_t **tree, rb_tree_t *new);
 void rb_rotate_right(rb_tree_t **tree, rb_tree_t *new);
 
+/* array_to_rb_tree.c */
 rb_tree_t *array_to_rb_tree(int *array, size_t size);
+
+/* rb_tree_remove.c */
 rb_tree_t *rb_tree_remove(rb_tree_t *root, int n);
+rb_tree_t *rb_tree_delete(rb_tree_t *root, rb_tree_t *remove);
+void rb_transplant(rb_tree_t **root, rb_tree_t *x, rb_tree_t *y);
+rb_tree_t *rb_delete_fixup(rb_tree_t *root, rb_tree_t *x);
+rb_tree_t *rb_delete_fix_left(rb_tree_t **root, rb_tree_t *x);
+rb_tree_t *rb_delete_fix_right(rb_tree_t **root, rb_tree_t *x);
+rb_tree_t *tree_min(rb_tree_t *root);
 
 #endif /*__RB_TREES_H__ */
