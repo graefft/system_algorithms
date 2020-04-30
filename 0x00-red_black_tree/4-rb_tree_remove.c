@@ -48,9 +48,10 @@ rb_tree_t *rb_tree_delete(rb_tree_t *root, rb_tree_t *remove)
 	else
 	{
 		y = tree_min(remove->right);
-		og_color = y->color;
+		if (y->color)
+			og_color = y->color;
 		x = y->right;
-		if (y->parent == remove)
+		if (y->parent && y->parent == remove)
 			x->parent = y;
 		else
 		{
@@ -80,11 +81,12 @@ void rb_transplant(rb_tree_t **root, rb_tree_t *x, rb_tree_t *y)
 {
 	if (x->parent == NULL)
 		*root = y;
-	else if (x == x->parent->left)
+	else if (x->parent->left && x == x->parent->left)
 		x->parent->left = y;
 	else
 		x->parent->right = y;
-	y->parent = x->parent;
+	if (y)
+		y->parent = x->parent;
 }
 
 /**
