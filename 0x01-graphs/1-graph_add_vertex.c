@@ -21,7 +21,7 @@ vertex_t *graph_add_vertex(graph_t *graph, const char *str)
 
 	if (!graph || !str)
 		return (NULL);
-	new_vertex = malloc(sizeof(vertex_t));
+	new_vertex = malloc(sizeof(*new_vertex));
 	if (!new_vertex)
 		return (NULL);
 	graph_vertex = graph->vertices;
