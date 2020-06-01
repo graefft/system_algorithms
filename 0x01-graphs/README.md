@@ -8,6 +8,7 @@ Different types of graphs:
 * weighted  
 Most common ways to represent graphs
 Depth-First Search vs Breadth-First Search 
+----
 
 ### Files Used in this Project
 FILE | DESCRIPTION
@@ -20,9 +21,11 @@ FILE | DESCRIPTION
 [5. Breadth-First Traversal](./5-breadth_first_traverse.c) | Function that goes through a graph using breadth-first algorithm
 
 ### Environment
-<b>OS:</b> Ubuntu 14.04 LTS
-<b>Compiler:</b> gcc 4.8.4 -Wall -Werror -Wextra -pedantic
+<b>OS:</b> Ubuntu 14.04 LTS  
+<b>Compiler:</b> gcc 4.8.4 -Wall -Werror -Wextra -pedantic  
 <b>Style:</b> [Betty coding style](https://github.com/holbertonschool/Betty/blob/master/betty-style.pl)
+
+----
 
 ### Author
 Thomas Graeff
