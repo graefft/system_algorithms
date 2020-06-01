@@ -6,11 +6,11 @@
  * @str: string to store in new vertex
  *
  * struct vertex_s {
- *	size_t		index;		<-- index of the vertex in adjacency list
- *	char		*content;	<-- custom data stored in the vertex
+ *  size_t		index;		<-- index of the vertex in adjacency list
+ *  char		*content;	<-- custom data stored in the vertex
  *  size_t		nb_edges;	<-- number of connections with other vertices
  *  edge_t		*edges;		<-- pointer to head node of edges linked-list
- *	vertex_s	*next;		<-- pointer to next vertex in the graph
+ *  vertex_s	*next;		<-- pointer to next vertex in the graph
  *}
  *
  * Return: pointer to created vertex or NULL on failure
