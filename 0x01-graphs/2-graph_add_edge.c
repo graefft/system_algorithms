@@ -22,19 +22,20 @@ int graph_add_edge(graph_t *graph, const char *src, const char *dest,
 	edge_t *src_edge, *dest_edge;
 	vertex_t *src_vertex, *dest_vertex;
 
-	if (!graph || !src || !dest)
+	if (!graph || !src || !dest ||
+		(type != UNIDIRECTIONAL && type != BIDIRECTIONAL))
 		return (0);
 
 	src_vertex = check_if_in_graph(graph, src);
 	dest_vertex = check_if_in_graph(graph, dest);
-	if (!src_vertex || !dest_vertex ||
-		(type != UNIDIRECTIONAL && type != BIDIRECTIONAL))
+	if (!src_vertex || !dest_vertex)
 		return (0);
 
 	src_edge = malloc(sizeof(*src_edge));
 	if (!src_edge)
 		return (0);
 	add_edge_to_vertex(src_vertex, dest_vertex, src_edge);
+
 	if (type == BIDIRECTIONAL)
 	{
 		dest_edge = malloc(sizeof(*dest_edge));
@@ -85,17 +86,11 @@ vertex_t *check_if_in_graph(graph_t *graph, const char *string)
 	while (vertex)
 	{
 		if (!strcmp(vertex->content, string))
-		{
 			return (vertex);
-		}
 		if (vertex->next)
-		{
 			vertex = vertex->next;
-		}
 		else
-		{
 			break;
-		}
 	}
 	return (NULL);
 }
