@@ -72,6 +72,9 @@ graph_t *graph_create(void);
 vertex_t *graph_add_vertex(graph_t *graph, const char *str);
 int graph_add_edge(graph_t *graph, const char *src, const char *dest,
 				   edge_type_t type);
+int add_edge_to_vertex(vertex_t *src, vertex_t *dest, edge_t *edge);
+vertex_t *check_if_in_graph(graph_t *graph, const char *string);
+edge_t *find_last_edge(edge_t *edges);
 void graph_delete(graph_t *graph);
 size_t depth_first_traverse(const graph_t *graph,
 							void (*action)(const vertex_t *v, size_t depth));
