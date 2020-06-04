@@ -79,12 +79,10 @@ void graph_delete(graph_t *graph);
 void delete_edge(edge_t *edges);
 size_t depth_first_traverse(const graph_t *graph,
 							void (*action)(const vertex_t *v, size_t depth));
-size_t dfs(vertex_t *vertex, void (*action)(const vertex_t *v, size_t depth),
-           int *visited, size_t depth, size_t max_depth);
-
+void dfs(vertex_t *vertex, void (*action)(const vertex_t *v, size_t depth),
+		 int *visited, size_t depth, size_t *max_depth);
 size_t breadth_first_traverse(const graph_t *graph,
 							  void (*action)(const vertex_t *v, size_t depth));
 void graph_display(const graph_t *graph);
-
 
 #endif /*__GRAPHS_H__*/

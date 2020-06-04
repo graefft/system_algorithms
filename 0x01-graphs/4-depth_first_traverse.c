@@ -15,7 +15,9 @@ size_t depth_first_traverse(const graph_t *graph, void (*action)
 	if (!graph || !action)
 		return (0);
 	visited = calloc(graph->nb_vertices, sizeof(*visited));
-	max_depth = dfs(graph->vertices, action, visited, 0, 0);
+	if (!visited)
+		return (0);
+	dfs(graph->vertices, action, visited, 0, &max_depth);
 	free(visited);
 	return (max_depth);
 }
@@ -29,17 +31,25 @@ size_t depth_first_traverse(const graph_t *graph, void (*action)
  * @max_depth: max depth
  * Return: max_depth or 0 on failure
  */
-size_t dfs(vertex_t *vertex, void (*action)(const vertex_t *v, size_t depth),
-			int *visited, size_t depth, size_t max_depth)
+void dfs(vertex_t *vertex, void (*action)(const vertex_t *v, size_t depth),
+			int *visited, size_t depth, size_t *max_depth)
 {
-	if (!vertex)
-		return (0);
+	edge_t *edges;
+
+	if (!vertex || visited[vertex->index])
+		return;
 
 	action(vertex, depth);
 	visited[vertex->index] = 1;
-	if (depth > max_depth)
-		max_depth = depth;
-	depth++;
-	return (max_depth);
-}
 
+	if (depth > *max_depth)
+		*max_depth = depth;
+	depth++;
+
+	edges = vertex->edges;
+	while (edges)
+	{
+		dfs(edges->dest, action, visited, depth, max_depth);
+		edges = edges->next;
+	}
+}
