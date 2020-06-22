@@ -7,9 +7,9 @@ From Holberton School's System Programming & Algorithm curriculum
 * Huffman Code  
 
 ### Environment
-_OS:_ Ubuntu 14.04 LTS  
-_Compiler:_ gcc 4.8.4 -Wall -Werror -Wextra -pedantic  
-_Style_: [Betty Style](https://github.com/holbertonschool/Betty/blob/master/betty-style.pl)  
+__OS:__ Ubuntu 14.04 LTS  
+__Compiler:__ gcc 4.8.4 -Wall -Werror -Wextra -pedantic  
+__Style__: [Betty Style](https://github.com/holbertonschool/Betty/blob/master/betty-style.pl)  
 
 ### Files
 FILE | DESCRIPTION
