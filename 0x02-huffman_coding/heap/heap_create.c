@@ -9,6 +9,9 @@ heap_t *heap_create(int (*data_cmp)(void *, void *))
 {
 	heap_t *new_heap_struct;
 
+	if (!data_cmp)
+		return (NULL);
+
 	new_heap_struct = malloc(sizeof(new_heap_struct));
 	if (!new_heap_struct)
 		return (NULL);
