@@ -10,9 +10,6 @@ binary_tree_node_t *binary_tree_node(binary_tree_node_t *parent, void *data)
 {
 	binary_tree_node_t *new_node;
 
-	if (!data)
-		return (NULL);
-
 	new_node = malloc(sizeof(binary_tree_node_t));
 	if (!new_node)
 		return (NULL);
