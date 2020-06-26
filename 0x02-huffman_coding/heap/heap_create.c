@@ -12,7 +12,7 @@ heap_t *heap_create(int (*data_cmp)(void *, void *))
 	if (!data_cmp)
 		return (NULL);
 
-	new_heap_struct = malloc(sizeof(new_heap_struct));
+	new_heap_struct = malloc(sizeof(heap_t));
 	if (!new_heap_struct)
 		return (NULL);
 
