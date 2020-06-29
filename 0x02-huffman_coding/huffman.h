@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "heap.h"
 
 /**
  * struct symbol_s - Stores a char and its associated frequency
