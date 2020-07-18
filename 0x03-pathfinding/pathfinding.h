@@ -13,11 +13,12 @@ typedef struct point_s
 	int y;
 } point_t;
 
+
 queue_t *backtracking_array(char **map, int rows, int cols,
 							point_t const *start, point_t const *target);
 queue_t *recursive_bt_array(char **map, char **solution, point_t *current,
 							point_t const *target, queue_t *path);
-void update_coordinates(queue_t **queue, int x, int y);
+void update_position(queue_t **queue, int x, int y);
 
 queue_t *backtracking_graph(graph_t *graph, vertex_t const *start,
 							vertex_t const *target);
