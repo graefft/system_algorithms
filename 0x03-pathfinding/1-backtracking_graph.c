@@ -50,13 +50,13 @@ int recursive_backtrack_graph(queue_t **path, int *visited,
  * @target: pointer to target vertex
  *
  * Return: queue in which each node is a char * corresponding to a vertex,
- *         forming a pth from start to target
+ *         forming a path from start to target
  */
 queue_t *backtracking_graph(graph_t *graph, vertex_t const *start,
 							vertex_t const *target)
 {
 	int *visited = NULL;
-	int itWorked;
+	int it_worked;
 	queue_t *path;
 
 	if (!graph || !start || !target)
@@ -73,9 +73,9 @@ queue_t *backtracking_graph(graph_t *graph, vertex_t const *start,
 		return (NULL);
 	}
 
-	itWorked = recursive_backtrack_graph(&path, visited, start, target);
+	it_worked = recursive_backtrack_graph(&path, visited, start, target);
 	free(visited);
-	if (itWorked)
+	if (it_worked)
 		return (path);
 
 	queue_delete(path);
