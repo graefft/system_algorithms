@@ -147,10 +147,9 @@ queue_t *backtracking_array(char **map, int rows, int cols,
 	if (initialize_arrays(&path, &visited, directions, rows, cols) == -1)
 		return (NULL);
 
-	/* CALL RECURSIVE BACKTRACK */
 	itWorked = (recursive_backtrack(map, visited, start->x, start->y,
 							target, &path, directions, rows, cols));
-	if (itWorked == 1)
+	if (itWorked)
 	{
 		for (i = 0; i < rows; i++)
 			free(visited[i]);
@@ -159,6 +158,9 @@ queue_t *backtracking_array(char **map, int rows, int cols,
 	}
 	else
 	{
+		for (i = 0; i < rows; i++)
+			free(visited[i]);
+		free(visited);
 		queue_delete(path);
 		return (NULL);
 	}
