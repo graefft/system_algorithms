@@ -149,18 +149,16 @@ queue_t *backtracking_array(char **map, int rows, int cols,
 
 	itWorked = (recursive_backtrack(map, visited, start->x, start->y,
 							target, &path, directions, rows, cols));
+	
+	for (i = 0; i < rows; i++)
+		free(visited[i]);
+	free(visited);
+	
 	if (itWorked)
-	{
-		for (i = 0; i < rows; i++)
-			free(visited[i]);
-		free(visited);
 		return (path);
-	}
+	
 	else
 	{
-		for (i = 0; i < rows; i++)
-			free(visited[i]);
-		free(visited);
 		queue_delete(path);
 		return (NULL);
 	}
