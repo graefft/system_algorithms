@@ -137,7 +137,7 @@ queue_t *backtracking_array(char **map, int rows, int cols,
 							point_t const *start, point_t const *target)
 {
 	int **visited;
-	int itWorked;
+	int i, itWorked;
 	queue_t *path;
 	point_t directions[NUM_DIRECTIONS];
 
@@ -152,6 +152,8 @@ queue_t *backtracking_array(char **map, int rows, int cols,
 							target, &path, directions, rows, cols));
 	if (itWorked == 1)
 	{
+		for (i = 0; i < rows; i++)
+			free(visited[i]);
 		free(visited);
 		return (path);
 	}
