@@ -150,7 +150,6 @@ queue_t *backtracking_array(char **map, int rows, int cols,
 	/* CALL RECURSIVE BACKTRACK */
 	itWorked = (recursive_backtrack(map, visited, start->x, start->y,
 							target, &path, directions, rows, cols));
-	printf("it Worked = %d\n", itWorked);
 	if (itWorked == 1)
 	{
 		free(visited);
