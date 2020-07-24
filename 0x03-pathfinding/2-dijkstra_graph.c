@@ -142,6 +142,6 @@ queue_t *dijkstra_graph(graph_t *graph, vertex_t const *start,
 
 	insert_into_queue(graph, path, previous, start, target);
 	free(visited);
-	free(parent);
+	free(previous);
 	return (path);
 }
