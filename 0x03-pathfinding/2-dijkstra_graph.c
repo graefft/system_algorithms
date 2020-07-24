@@ -16,6 +16,7 @@ vertex_t *get_min_distance(graph_t *graph, size_t *distance, size_t *visited)
 	size_t i;
 	vertex_t *vertex;
 
+	vertex = graph->vertices;
 	for (i = 0; i < graph->nb_vertices; i++)
 	{
 		if (visited[i] == 0 && distance[i] <= min)
@@ -51,17 +52,17 @@ void insert_into_queue(graph_t *graph, queue_t *path, char **previous,
 	vertex_t *vertex;
 
 	idx = target->index;
-	queue_push_front(path, strdup(target->content));
 	printf("INSERT_INTO_QUEUE - while\n");
 	if (previous[target->index])
 	{
+		queue_push_front(path, strdup(target->content));
 		while (strcmp(previous[idx], start->content))
 		{
-			printf("in loop\n");
+			printf("previous[idx] = %s\n", previous[idx]);
 			vertex = graph->vertices;
-			queue_push_front(path, strdup(previous[target->index]));
+			queue_push_front(path, strdup(previous[idx]));
 			printf("while of while\n");
-			while (vertex && i < graph->nb_vertices)
+			for (i = 0; vertex && i < graph->nb_vertices; i++)
 			{
 				if (strcmp(vertex->content, previous[idx]) == 0)
 				{
@@ -72,7 +73,7 @@ void insert_into_queue(graph_t *graph, queue_t *path, char **previous,
 				vertex = vertex->next;
 			}
 		}
-	queue_push_front(path, strdup(start->content));
+		queue_push_front(path, strdup(start->content));
 	}
 }
 
