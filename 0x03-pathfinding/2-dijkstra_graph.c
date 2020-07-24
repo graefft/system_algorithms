@@ -52,23 +52,28 @@ void insert_into_queue(graph_t *graph, queue_t *path, char **previous,
 
 	idx = target->index;
 	queue_push_front(path, strdup(target->content));
-
-	while (strcmp(previous[idx], start->content))
+	printf("INSERT_INTO_QUEUE - while\n");
+	if (previous[target->index])
 	{
-		vertex = graph->vertices;
-		queue_push_front(path, strdup(previous[target->index]));
-		while (vertex && i < graph->nb_vertices)
+		while (strcmp(previous[idx], start->content))
 		{
-			if (strcmp(vertex->content, previous[idx]) == 0)
+			printf("in loop\n");
+			vertex = graph->vertices;
+			queue_push_front(path, strdup(previous[target->index]));
+			printf("while of while\n");
+			while (vertex && i < graph->nb_vertices)
 			{
-				idx = i;
-				break;
+				if (strcmp(vertex->content, previous[idx]) == 0)
+				{
+					printf("in if statement\n");
+					idx = i;
+					break;
+				}
+				vertex = vertex->next;
 			}
-			vertex = vertex->next;
 		}
-	}
 	queue_push_front(path, strdup(start->content));
-
+	}
 }
 
 /**
@@ -91,8 +96,15 @@ void recursive_dijkstra(graph_t *graph, size_t *distance, size_t *visited,
 	edge_t *edge;
 	size_t i;
 
+	printf("current\n");
 	current = get_min_distance(graph, distance, visited);
+	if (!current)
+	{
+		printf("current failed\n");
+		return;
+	}
 
+	printf("this failed\n");
 	printf("Checking %s, distance from %s is %ld\n", current->content,
 			start->content, distance[current->index]);
 
@@ -161,8 +173,9 @@ queue_t *dijkstra_graph(graph_t *graph, vertex_t const *start,
 	}
 	distance[start->index] = 0;
 
+	printf("here\n");
 	recursive_dijkstra(graph, distance, visited, previous, start, target);
-
+	printf("next is insert into queue\n");
 	insert_into_queue(graph, path, previous, start, target);
 	free(visited);
 	free(previous);
