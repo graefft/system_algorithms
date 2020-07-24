@@ -9,18 +9,28 @@
  *
  * Return: index with minimum distance or NULL
  */
-size_t *get_min_distance(graph_t *graph, size_t *distance, size_t *visited)
+vertex_t *get_min_distance(graph_t *graph, size_t *distance, size_t *visited)
 {
 	size_t min = UINT_MAX;
-	size_t min_idx = UINT_MAX;
+	size_t min_index = UINT_MAX;
 	size_t i;
+	vertex_t *vertex;
 
 	for (i = 0; i < graph->nb_vertices; i++)
 	{
 		if (visited[i] == 0 && distance[i] <= min)
-			min = distance[i], min_index = i;
+		{
+			min = distance[i];
+			min_index = i;
+		}
 	}
-	return (min_index);
+	while (vertex != NULL)
+	{
+		if (vertex->index == min_index)
+			return (vertex);
+		vertex = vertex->next;
+	}
+	return (NULL);
 }
 
 /**
@@ -34,17 +44,28 @@ size_t *get_min_distance(graph_t *graph, size_t *distance, size_t *visited)
  *
  * Return: void
  */
-void insert_into_queue(grapht_t *graph, queue_t *path, char **previous,
+void insert_into_queue(graph_t *graph, queue_t *path, char **previous,
                        vertex_t const *start, vertex_t const *target)
 {
-	size_t idx;
+	size_t i = 0, idx;
+	vertex_t *vertex;
 
+	idx = target->index;
 	queue_push_front(path, strdup(target->content));
 
-	while (previous[idx])
+	while (strcmp(previous[idx], start->content))
 	{
-		queue_push_front(path, strdup(previous[idx]));
-		idx = previous[idx]->index;
+		vertex = graph->vertices;
+		queue_push_front(path, strdup(previous[target->index]));
+		while (vertex && i < graph->nb_vertices)
+		{
+			if (strcmp(vertex->content, previous[idx]) == 0)
+			{
+				idx = i;
+				break;
+			}
+			vertex = vertex->next;
+		}
 	}
 	queue_push_front(path, strdup(start->content));
 
@@ -62,17 +83,17 @@ void insert_into_queue(grapht_t *graph, queue_t *path, char **previous,
  *
  * Return: queue of shortest path or NULL
  */
-queue_t recursive_dijkstra(graph_t *graph, size_t *distance, size_t *visited,
+void recursive_dijkstra(graph_t *graph, size_t *distance, size_t *visited,
 							char **previous, vertex_t const *start,
 							vertex_t const *target)
 {
 	vertex_t *current;
 	edge_t *edge;
-	size_t i, min;
+	size_t i;
 
-	vertex = get_min_distance(graph, distance, visited);
+	current = get_min_distance(graph, distance, visited);
 
-	printf("Checking %s, distance from %s is %d\n", current->content,
+	printf("Checking %s, distance from %s is %ld\n", current->content,
 			start->content, distance[current->index]);
 
 	edge = current->edges;
@@ -86,10 +107,12 @@ queue_t recursive_dijkstra(graph_t *graph, size_t *distance, size_t *visited,
 		}
 	edge = edge->next;
 	}
-	min = get_min_distance(graph, distance, visited);
+	current = get_min_distance(graph, distance, visited);
 	visited[i] = 1;
-	if (min == UINT_MAX || visited[target->index] == 1)
+	if (current->index == UINT_MAX || visited[target->index] == 1)
 		return;
+
+	recursive_dijkstra(graph, distance, visited, previous, start, target);
 }
 /**
  * dijkstra_graph - searches for the shortest path from a starting point to a
@@ -114,12 +137,12 @@ queue_t *dijkstra_graph(graph_t *graph, vertex_t const *start,
 
 	path = queue_create();
 	visited = (size_t *)malloc(graph->nb_vertices * sizeof(size_t));
-	if (!visited);
+	if (!visited)
 		return (NULL);
 	previous = (char **)malloc(graph->nb_vertices * sizeof(char *)); 
 	if (!previous)
 	{
-		free(!visited);
+		free(visited);
 		return (NULL);
 	}
 	distance = malloc(graph->nb_vertices * sizeof(*distance));
