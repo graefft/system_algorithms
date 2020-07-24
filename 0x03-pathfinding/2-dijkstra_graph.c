@@ -45,7 +45,7 @@ vertex_t *get_min_distance(graph_t *graph, size_t *distance, size_t *visited)
  * Return: void
  */
 void insert_into_queue(graph_t *graph, queue_t *path, char **previous,
-                       vertex_t const *start, vertex_t const *target)
+			vertex_t const *start, vertex_t const *target)
 {
 	size_t i = 0, idx;
 	vertex_t *vertex;
@@ -143,7 +143,7 @@ queue_t *dijkstra_graph(graph_t *graph, vertex_t const *start,
 	size_t i, *distance, *visited;
 	queue_t *path;
 	char **previous;
-	
+
 	if (!graph || !start || !target)
 		return (NULL);
 
@@ -151,7 +151,7 @@ queue_t *dijkstra_graph(graph_t *graph, vertex_t const *start,
 	visited = (size_t *)malloc(graph->nb_vertices * sizeof(size_t));
 	if (!visited)
 		return (NULL);
-	previous = (char **)malloc(graph->nb_vertices * sizeof(char *)); 
+	previous = (char **)malloc(graph->nb_vertices * sizeof(char *));
 	if (!previous)
 	{
 		free(visited);
