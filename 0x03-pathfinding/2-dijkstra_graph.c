@@ -21,6 +21,8 @@ vertex_t *get_min_distance(graph_t *graph, size_t *distance, size_t *visited,
 	if (vertex == NULL)
 		return (NULL);
 
+	*index = ULONG_MAX;
+
 	for (i = 0; i < graph->nb_vertices; i++)
 	{
 		if (visited[i] == 0 && min > distance[i])
@@ -168,7 +170,7 @@ queue_t *dijkstra_graph(graph_t *graph, vertex_t const *start,
 	/* Load queue with content from path_via array */
 	insert_into_queue(graph, queue, path_via, start, target);
 	free(visited);
-	free(path_via);
 	free(distance);
+	free(path_via);
 	return (queue);
 }
