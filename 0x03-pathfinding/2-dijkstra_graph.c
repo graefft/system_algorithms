@@ -63,7 +63,6 @@ void insert_into_queue(graph_t *graph, queue_t *path, vertex_t **path_via,
 	if (!path_via[i])
 		return;
 
-	/* Push into queue starting at end (target node) */
 	if (!queue_push_front(path, strdup(target->content)))
 		queue_delete(path);
 
