@@ -64,11 +64,13 @@ void insert_into_queue(graph_t *graph, queue_t *path, vertex_t **path_via,
 		return;
 
 	/* Push into queue starting at end (target node) */
-	queue_push_front(path, strdup(target->content));
+	if (!queue_push_front(path, strdup(target->content)))
+		queue_delete(path);
 
 	while (path_via[i] && i < graph->nb_vertices)
 	{
-		queue_push_front(path, strdup(path_via[i]->content));
+		if (!queue_push_front(path, strdup(path_via[i]->content)))
+			queue_delete(path);
 		i = path_via[i]->index;
 		if (i == start->index)
 			return;
@@ -142,7 +144,6 @@ queue_t *dijkstra_graph(graph_t *graph, vertex_t const *start,
 	if (!graph || !start || !target)
 		return (NULL);
 
-	/* Initialize arrays and set to 0 or max */
 	visited = calloc(graph->nb_vertices, sizeof(*visited));
 	if (!visited)
 		return (NULL);
@@ -162,15 +163,18 @@ queue_t *dijkstra_graph(graph_t *graph, vertex_t const *start,
 	for (i = 0; i < graph->nb_vertices; i++)
 		distance[i] = ULONG_MAX;
 
-	/* Create queue, set start distance to 0 and begin */
 	queue = queue_create();
 	distance[start->index] = 0;
 	recursive_dijkstra(graph, distance, visited, path_via, start, target, 0);
 
-	/* Load queue with content from path_via array */
 	insert_into_queue(graph, queue, path_via, start, target);
 	free(visited);
 	free(distance);
 	free(path_via);
+	if (!queue->front)
+	{
+		free(queue);
+		return (NULL);
+	}
 	return (queue);
 }
