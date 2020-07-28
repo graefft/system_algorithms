@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <limits.h>
+#include <math.h>
 #include "graphs.h"
 #include "queues.h"
 
