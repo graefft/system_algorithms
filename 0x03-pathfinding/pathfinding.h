@@ -11,6 +11,7 @@
 #include "queues.h"
 
 #define NUM_DIRECTIONS 4
+#define h(x1, y1, x2, y2)  (sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2)))
 
 /**
  * enum direction_s - which way to go
