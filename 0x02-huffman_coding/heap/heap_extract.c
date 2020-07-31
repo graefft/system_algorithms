@@ -1,5 +1,4 @@
 #include "heap.h"
-#include <stdint.h>
 
 /**
  * sift_down - heapifies subtree
