@@ -44,8 +44,6 @@ void heap_delete(heap_t *heap, void (*free_data)(void *));
 
 binary_tree_node_t *heapify(heap_t *heap, binary_tree_node_t *inserted);
 binary_tree_node_t *nth_node(binary_tree_node_t *root, int n);
-int find_depth(binary_tree_node_t *tree);
-int is_perfect_recursion(binary_tree_node_t *tree, int depth, int level);
 int binary_tree_is_perfect(binary_tree_node_t *tree);
 size_t binary_tree_height(binary_tree_node_t *tree);
 void sift_down(heap_t *heap);
