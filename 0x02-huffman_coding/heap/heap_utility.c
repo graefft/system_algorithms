@@ -39,20 +39,3 @@ int is_perfect_recursion(binary_tree_node_t *tree, int depth, int level)
 			is_perfect_recursion(tree->right, depth, level + 1));
 }
 
-
-/**
- * binary_tree_is_perfect - function that checks if binary tree is perfect
- *
- * @tree: binary tree
- * Return: 1 if tree is perfect
- */
-int binary_tree_is_perfect(binary_tree_node_t *tree)
-{
-	int depth;
-
-	if (tree == NULL)
-		return (0);
-
-	depth = find_depth(tree);
-	return (is_perfect_recursion(tree, depth, 0));
-}
