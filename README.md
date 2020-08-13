@@ -1,4 +1,4 @@
-# System Programming & Algorithm
+# SYSTEM PROGRAMMING & ALGORITHM
 
 
 ### About
