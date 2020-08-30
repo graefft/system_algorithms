@@ -12,27 +12,24 @@ nary_tree_t *nary_tree_insert(nary_tree_t *parent, char const *str)
 	nary_tree_t *new_tree_node;
 	char *string_dup;
 
-
 	new_tree_node = malloc(sizeof(nary_tree_t));
 	if (!new_tree_node)
 		return (NULL);
 
 	string_dup = strdup((char *)str);
 	new_tree_node->content = string_dup;
+
 	new_tree_node->nb_children = 0;
+	new_tree_node->parent = parent;
+	new_tree_node->children = NULL;
 	if (parent)
 	{
-		if (parent->children)
-		{
-			new_tree_node->next = parent->children;
-			parent->children->parent = new_tree_node;
-		}
+		new_tree_node->next = parent->children;
+		parent->children->parent = new_tree_node;
 		parent->children = new_tree_node;
-		new_tree_node->parent = parent;
 	}
 	else
-		new_tree_node->parent = NULL;
-	new_tree_node->children = NULL;
+		new_tree_node->next = NULL;
 	free(string_dup);
 	return (new_tree_node);
 }
