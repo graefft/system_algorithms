@@ -18,18 +18,20 @@ nary_tree_t *nary_tree_insert(nary_tree_t *parent, char const *str)
 
 	string_dup = strdup((char *)str);
 	new_tree_node->content = string_dup;
-
 	new_tree_node->nb_children = 0;
-	new_tree_node->parent = parent;
 	new_tree_node->children = NULL;
 	if (parent)
 	{
+		new_tree_node->parent = parent;
 		new_tree_node->next = parent->children;
 		parent->children = new_tree_node;
 		parent->nb_children++;
 	}
 	else
+	{
+		new_tree_node->parent = NULL;
 		new_tree_node->next = NULL;
+	}
 	free(string_dup);
 	return (new_tree_node);
 }
