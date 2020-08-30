@@ -25,8 +25,8 @@ nary_tree_t *nary_tree_insert(nary_tree_t *parent, char const *str)
 	if (parent)
 	{
 		new_tree_node->next = parent->children;
-		parent->children->parent = new_tree_node;
 		parent->children = new_tree_node;
+		parent->nb_children++;
 	}
 	else
 		new_tree_node->next = NULL;
