@@ -7,7 +7,7 @@
  * @diameter: maximum diameter between two nodes
  * Return: max height
  */
-size_t max_height(nary_tree_t const *root, int *diameter)
+size_t max_height(nary_tree_t const *root, size_t *diameter)
 {
 	nary_tree_t *child;
 	size_t max_1 = 0;
@@ -16,7 +16,7 @@ size_t max_height(nary_tree_t const *root, int *diameter)
 
 	for (child = root->children; child; child = child->next)
 	{
-		height = max_height(child);
+		height = max_height(child, diameter);
 		if (height >= max_1)
 		{
 			max_2 = max_1;
@@ -25,7 +25,7 @@ size_t max_height(nary_tree_t const *root, int *diameter)
 		else if (height > max_2)
 			max_2 = height;
 	}
-	*diameter = MAX(diameter, max_1 + max_2);
+	*diameter = MAX(*diameter, max_1 + max_2);
 	return (MAX(max_1, max_2));
 }
 
