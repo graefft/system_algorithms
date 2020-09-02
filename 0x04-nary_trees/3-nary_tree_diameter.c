@@ -14,6 +14,9 @@ size_t max_height(nary_tree_t const *root, size_t *diameter)
 	size_t max_2 = 0;
 	size_t height;
 
+	if (!root)
+		return (0);
+
 	for (child = root->children; child; child = child->next)
 	{
 		height = max_height(child, diameter);
@@ -26,7 +29,7 @@ size_t max_height(nary_tree_t const *root, size_t *diameter)
 			max_2 = height;
 	}
 	*diameter = MAX(*diameter, max_1 + max_2);
-	return (MAX(max_1, max_2));
+	return (max_1 + 1);
 }
 
 /**
@@ -37,7 +40,7 @@ size_t max_height(nary_tree_t const *root, size_t *diameter)
  */
 size_t nary_tree_diameter(nary_tree_t const *root)
 {
-	size_t diameter;
+	size_t diameter = 0;
 
 	if (!root)
 		return (0);
